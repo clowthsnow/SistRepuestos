@@ -7,7 +7,6 @@
 //import com.mysql.jdbc.Connection;
 import java.util.ArrayList;
 import modelo.Cliente;
-import controlador.ClienteDAO;
 import modelo.Conexion;
 import modelo.Proveedor;
 import controlador.ProveedorDAO;
