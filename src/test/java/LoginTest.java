@@ -1,11 +1,11 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import controlador.MarcaDAO;
-import modelo.Marca;
+import modelo.Usuario;
+import controlador.UsuarioDAO;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Mario-Snow
+ * @author Rodrigo
  */
-public class MarcaTest {
+public class LoginTest {
     
-    public MarcaTest() {
+    public LoginTest() {
     }
     
     @BeforeClass
@@ -45,10 +45,12 @@ public class MarcaTest {
     // @Test
     // public void hello() {}
     @Test
-    public void insertarMarca(){
-        Marca marca= new Marca("KIA", "kia", "A");
-        MarcaDAO marcaDAO= new MarcaDAO();
-        Assert.assertTrue(marcaDAO.insertarMarca(marca));
-        
-    }
+    public void testLoginOk() {
+        Usuario user = new Usuario("1", "admin");
+        UsuarioDAO u=new UsuarioDAO();
+        u.verificarUsuario(user.getCodigo(), user.getContraseña());
+        Assert.assertTrue(u != null);
+        Assert.assertTrue("1".equals(user.getCodigo()));
+        Assert.assertTrue("admin".equals(user.getContraseña()));
+    }   
 }

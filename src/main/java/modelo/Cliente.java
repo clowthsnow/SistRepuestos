@@ -16,17 +16,17 @@ public class Cliente {
      private String telefono;
      private String correo;
 
-    public Cliente(String codigo, String nombre, String direccion, String telefono, String correo) {
-        this.codigo = codigo;
+    public Cliente(){
+    }
+     public Cliente(String nombre, String dni, String direccion, String telefono, String correo) {
+        
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
     }
 
-    public Cliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
     public String getCodigo() {
         return codigo;

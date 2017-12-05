@@ -12,10 +12,14 @@ package modelo;
 public class Categoria {
     private String codigo;
     private String descripcion;
+    //private String estadoRegistro;
     
+    public Categoria(){
+    }
     public Categoria(String codigo , String descripcion){
         this.codigo = codigo;
         this.descripcion = descripcion;
+        //this.estadoRegistro = estado;
     }
     
     public String getCodigo() {
@@ -33,4 +37,12 @@ public class Categoria {
     public void setDescripcion(String dni) {
         this.descripcion = descripcion;
     }
+    
+    /*public String getEstadoRegistro() {
+        return estadoRegistro;
+    }
+
+    public void setEstadoRegistro(String estado) {
+        this.estadoRegistro = estado;*/
+    
 }
