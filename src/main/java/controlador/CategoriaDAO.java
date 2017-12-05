@@ -16,6 +16,7 @@ import modelo.Categoria;
 
 
 
+
 public class CategoriaDAO {
     Conexion conexion;
     

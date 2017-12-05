@@ -47,38 +47,38 @@ public class UsuarioTest {
     //
     // @Test
     // public void hello() {}
-    @Test
-    public void insertar(){
-        Usuario usuario = new Usuario("5","rodrigo","rodrigo","72148783","1","A");
-	UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Assert.assertTrue(usuarioDAO.insertUsuario(usuario));
-       
-    }
-    /*@Test
-    public void modificarContraseña(){
-        Usuario usuario = new Usuario("1","rodrigo","rodrigo","72148783","1","A");
-	UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Assert.assertTrue(usuarioDAO.modificarContraseña(usuario,"contraAntigua","contraNueva"));
-    }
-    */
-    @Test
-    public void modificarUsuario(){
-        Usuario usuario = new Usuario("1","rodrigo","rodrigo","72148783","1","A");
-	UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Assert.assertTrue(usuarioDAO.modificarUsuario(usuario));
-    }
-    
-    @Test
-    public void eliminar(){
-        Usuario usuario = new Usuario("2","rodrigo","rodrigo","72148783","1","A");
-	UsuarioDAO usuarioDAO = new UsuarioDAO();
-        Assert.assertTrue(usuarioDAO.eliminarUsuario(usuario));
-    }
-    @Test
-    public void listar(){
-        Usuario usuario = new Usuario("1","rodrigo","rodrigo","72148783","1","A");;
-        ArrayList<Usuario> users=new ArrayList<Usuario>();
-        users.add(usuario);
-        Assert.assertNotNull(users);
-    }
+//    @Test
+//    public void insertar(){
+//        Usuario usuario = new Usuario("5","rodrigo","rodrigo","72148783","1","A");
+//	UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        Assert.assertTrue(usuarioDAO.insertUsuario(usuario));
+//       
+//    }
+//    /*@Test
+//    public void modificarContraseña(){
+//        Usuario usuario = new Usuario("1","rodrigo","rodrigo","72148783","1","A");
+//	UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        Assert.assertTrue(usuarioDAO.modificarContraseña(usuario,"contraAntigua","contraNueva"));
+//    }
+//    */
+//    @Test
+//    public void modificarUsuario(){
+//        Usuario usuario = new Usuario("1","rodrigo","rodrigo","72148783","1","A");
+//	UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        Assert.assertTrue(usuarioDAO.modificarUsuario(usuario));
+//    }
+//    
+//    @Test
+//    public void eliminar(){
+//        Usuario usuario = new Usuario("2","rodrigo","rodrigo","72148783","1","A");
+//	UsuarioDAO usuarioDAO = new UsuarioDAO();
+//        Assert.assertTrue(usuarioDAO.eliminarUsuario(usuario));
+//    }
+//    @Test
+//    public void listar(){
+//        Usuario usuario = new Usuario("1","rodrigo","rodrigo","72148783","1","A");;
+//        ArrayList<Usuario> users=new ArrayList<Usuario>();
+//        users.add(usuario);
+//        Assert.assertNotNull(users);
+//    }
 }
