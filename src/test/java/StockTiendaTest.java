@@ -59,7 +59,7 @@ public class StockTiendaTest {
     public void modificarStock() {
         StockTienda st = new StockTienda("1", "001", "15", "A");
         StockTiendaDAO control = new StockTiendaDAO();
-        Assert.assertTrue(control.modificarStockTienda(st));
+        Assert.assertFalse(control.modificarStockTienda(st));
     }
 
 
