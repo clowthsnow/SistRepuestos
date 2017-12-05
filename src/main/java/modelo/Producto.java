@@ -9,7 +9,7 @@ package modelo;
  *
  * @author Mario-Snow
  */
-public class Productos {
+public class Producto {
     String id;
     int categoria;
     int origen;
@@ -17,7 +17,7 @@ public class Productos {
     double precio;
     String estadoRegistro;
 
-    public Productos(String id, int categoria, int origen, String descripcion, double precio, String estadoRegistro) {
+    public Producto(String id, int categoria, int origen, String descripcion, double precio, String estadoRegistro) {
         this.id = id;
         this.categoria = categoria;
         this.origen = origen;
