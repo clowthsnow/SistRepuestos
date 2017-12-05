@@ -13,6 +13,8 @@ public class Categoria {
     private String codigo;
     private String descripcion;
     
+    public Categoria(){
+    }
     public Categoria(String codigo , String descripcion){
         this.codigo = codigo;
         this.descripcion = descripcion;
