@@ -43,7 +43,7 @@ public class StockTiendaDAO {
         }
         return q;
     }
-    public Boolean modificarUsuario(StockTienda stockTienda){
+    public Boolean modificarStockTienda(StockTienda stockTienda){
         Boolean rptaRegistro = false;
         try{
             Connection accesoDB = conexion.getConexion();
