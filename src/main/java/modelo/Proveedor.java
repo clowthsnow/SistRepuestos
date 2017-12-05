@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Rodrigo
@@ -27,6 +29,14 @@ public class Proveedor {
 
     public Proveedor() {
        
+    }
+
+    public Proveedor(JTextField txtRUC, JTextField txtNombres, JTextField txtDireccion, JTextField txtCorreo, JTextField txtTelefono) {
+       this.RUC=txtRUC.getText();
+       this.razonSocial = txtNombres.getText();
+       this.direccion = txtDireccion.getText();
+       this.correo = txtCorreo.getText();
+       this.telefono = txtTelefono.getText();
     }
     public String getRUC() {
         return RUC;

@@ -27,7 +27,7 @@ public class OrigenDAO {
         Origen origen = null;
         Connection acceso = conexion.getConexion();
         try{
-            PreparedStatement ps = acceso.prepareStatement("select * from ORIGEN where OrigenId=? and OrigenDescripcion=?");
+            PreparedStatement ps = acceso.prepareStatement("select * from ORIGEN where OrigenId=?");
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -66,9 +66,8 @@ public class OrigenDAO {
         Boolean q=false;
         try{
             Connection accesoDB = conexion.getConexion();
-            CallableStatement cs = accesoDB.prepareCall("INSERT INTO `ORIGEN` (`OrigenId`, `OrigenDescripcion`) VALUES (?, ?);");
-            cs.setString(1, origen.getCodigo());
-            cs.setString(2, origen.getDescripcion());
+            CallableStatement cs = accesoDB.prepareCall("INSERT INTO `repuestos`.`ORIGEN` (`OrigenId`, `OrigenDescripcion`) VALUES (NULL, ?);");
+            cs.setString(1, origen.getDescripcion());
             
             int numFAfectadas = cs.executeUpdate();
             if(numFAfectadas > 0)
@@ -79,13 +78,52 @@ public class OrigenDAO {
         }
         return q;
     }
-
-    public String modificarOrigen(String codigo, String descripcion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean modificarOrigen(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean modificarOrigen(Origen origen) {
+        Boolean rptaRegistro = false;
+        try{
+            Connection accesoDB = conexion.getConexion();
+            CallableStatement cs = accesoDB.prepareCall("UPDATE  `repuestos`.`ORIGEN` SET `OrigenDescripcion` =  ? WHERE  `ORIGEN`.`OrigenId` =?;");
+            cs.setString(1, origen.getDescripcion());
+            cs.setString(2, origen.getCodigo());
+            int numFAfectadas = cs.executeUpdate();
+            if(numFAfectadas > 0)
+                rptaRegistro=true;
+            accesoDB.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rptaRegistro;
     }
     
+    public boolean eliminarOrigen(Origen origen) {
+        Boolean rptaRegistro = false;
+        try{
+            Connection accesoDB = conexion.getConexion();
+            CallableStatement cs = accesoDB.prepareCall("UPDATE  `repuestos`.`ORIGEN` SET  `OrigenEstReg` =  'I' WHERE  `ORIGEN`.`OrigenId` =?");
+            cs.setString(1, origen.getCodigo());
+            int numFAfectadas = cs.executeUpdate();
+            if(numFAfectadas > 0)
+                rptaRegistro = true;
+            accesoDB.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rptaRegistro;
+    }
+    public boolean eliminarOrigen2(Origen origen) {
+        Boolean rptaRegistro = false;
+        try{
+            Connection accesoDB = conexion.getConexion();
+            //String eliminarSQL="DELETE FROM ORIGEN WHERE OrigenId = '"+origen.getCodigo()+"'";
+            CallableStatement cs = accesoDB.prepareCall("DELETE FROM ORIGEN WHERE OrigenId = '"+origen.getCodigo()+"'");
+            //cs.setString(1, origen.getCodigo());
+            int numFAfectadas = cs.executeUpdate();
+            if(numFAfectadas > 0)
+                rptaRegistro = true;
+            accesoDB.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return rptaRegistro;
+    }
 }

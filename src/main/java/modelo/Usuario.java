@@ -1,81 +1,84 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
-/**
- *
- * @author Mario-Snow
- */
 public class Usuario {
-    String id;
-    String nombres;
-    String contra;
-    String dni;
-    int cargo;
-    String estadoRegistro;
+        private String codigo;
+	private String nombre;
+	private String contraseña;
+	private String DNI;
+        private String cargo;
+	private String EstRegistro;
+	public Usuario() {
+		this.codigo = "";
+		this.nombre = "";
+		this.contraseña = "";
+                this.DNI="";
+		this.cargo = "";
+		EstRegistro = "";
+	}
+        public Usuario(String codigo, String contraseña) {
+		this.codigo = codigo;
+		this.nombre = null;
+		this.contraseña = contraseña;
+                this.DNI=null;
+		this.cargo = null;
+		EstRegistro = null;
+	}
 
-    public Usuario(String id, String nombres, String contra, String dni, int cargo, String estadoRegistro) {
-        this.id = id;
-        this.nombres = nombres;
-        this.contra = contra;
-        this.dni = dni;
+    public Usuario(String codigo, String nombre, String contraseña, String DNI, String cargo, String EstRegistro) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.DNI = DNI;
         this.cargo = cargo;
-        this.estadoRegistro = estadoRegistro;
+        this.EstRegistro = EstRegistro;
     }
 
-    public Usuario() {
-        super();
+    public String getCodigo() {
+        return codigo;
     }
 
-    public String getId() {
-        return id;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getContra() {
-        return contra;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getDni() {
-        return dni;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public int getCargo() {
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getCargo() {
         return cargo;
     }
 
-    public String getEstadoRegistro() {
-        return estadoRegistro;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public void setContra(String contra) {
-        this.contra = contra;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public void setCargo(int cargo) {
+    public void setCargo(String cargo) {
         this.cargo = cargo;
     }
 
-    public void setEstadoRegistro(String estadoRegistro) {
-        this.estadoRegistro = estadoRegistro;
+    public String getEstRegistro() {
+        return EstRegistro;
     }
-    
+
+    public void setEstRegistro(String EstRegistro) {
+        this.EstRegistro = EstRegistro;
+    }
+        
 }

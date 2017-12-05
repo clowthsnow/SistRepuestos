@@ -16,10 +16,11 @@ public class Origen {
     private String descripcion;
 
     public Origen(String text, String text0) {
-         if(text.equalsIgnoreCase("") || text0.equalsIgnoreCase("")){
+        /*if(text.equalsIgnoreCase("") || text0.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null,"Datos incompletos.");
             return;
         }
+        */
         this.codigo=text;
         this.descripcion=text0;
     }

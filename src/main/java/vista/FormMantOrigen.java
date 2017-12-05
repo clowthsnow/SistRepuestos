@@ -1,13 +1,20 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package vista;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import modelo.Conexion;
 import modelo.Origen;
 import controlador.OrigenDAO;
 
@@ -17,6 +24,7 @@ import controlador.OrigenDAO;
  */
 public class FormMantOrigen extends javax.swing.JFrame {
     boolean isNew = true;
+    DefaultTableModel model;
     public static OrigenDAO origenDAO=new OrigenDAO();
     /**
      * Creates new form FormMantOrigen
@@ -39,20 +47,22 @@ public class FormMantOrigen extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnNuevo = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Datos = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(" Mantenimiento Origen Repuesto"));
 
+        txtCodigo.setEditable(false);
+        txtCodigo.setText("AUTOGENERADO");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);
@@ -63,19 +73,29 @@ public class FormMantOrigen extends javax.swing.JFrame {
 
         jLabel2.setText("Descripcion");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479709665_New.png"))); // NOI18N
-        jButton1.setText("Nuevo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479709665_New.png"))); // NOI18N
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnNuevoActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479702714_Remove.png"))); // NOI18N
-        jButton3.setText("Eliminar");
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479702714_Remove.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479702744_Preview.png"))); // NOI18N
-        jButton4.setText("Modificar");
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479702744_Preview.png"))); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1479702704_Save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
@@ -93,11 +113,11 @@ public class FormMantOrigen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnNuevo)
                         .addGap(2, 2, 2)
-                        .addComponent(jButton3)
+                        .addComponent(btnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
+                        .addComponent(btnModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGuardar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -125,9 +145,9 @@ public class FormMantOrigen extends javax.swing.JFrame {
                         .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -145,13 +165,23 @@ public class FormMantOrigen extends javax.swing.JFrame {
                 "Codigo", "Origen"
             }
         ));
+        Datos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DatosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Datos);
 
         jLabel3.setText("Busqueda Origen Repuesto");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                txtBuscarActionPerformed(evt);
+            }
+        });
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
             }
         });
 
@@ -164,7 +194,7 @@ public class FormMantOrigen extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,7 +203,7 @@ public class FormMantOrigen extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(76, Short.MAX_VALUE))
@@ -206,14 +236,70 @@ public class FormMantOrigen extends javax.swing.JFrame {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    void limpiar(){
+    txtCodigo.setText("");
+    txtDescripcion.setText("");
+    }
+    void desbloquear(){
+    txtCodigo.setEnabled(true);
+    txtDescripcion.setEnabled(true);
+    
+    //btnGuardar.setEnabled(true);
+    //btnNuevo.setEnabled(false);
+    //btnCancelar.setEnabled(true);
+    }
+    void codigos(){
+        int j;
+        int cont=1;
+        String num="";
+        String c="";
+         String SQL="select max(cod_pro) from producto";
+       // String SQL="select count(*) from factura";
+        //String SQL="SELECT MAX(cod_emp) AS cod_emp FROM empleado";
+        //String SQL="SELECT @@identity AS ID";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs=st.executeQuery(SQL);
+            if(rs.next())
+            {              
+                 c=rs.getString(1);
+            }
+            
+           
+            if(c==null){
+                txtCodigo.setText("0001");
+            }
+            else{
+                char r1=c.charAt(0);
+            char r2=c.charAt(1);
+            char r3=c.charAt(2);
+            char r4=c.charAt(3);
+            String r="";
+            r=""+r1+r2+r3+r4;
+                 j=Integer.parseInt(r);
+                 GenerarCodigos gen= new GenerarCodigos();
+                 gen.generar(j);
+                 txtCodigo.setText(gen.serie());
+                
+            
+            }
+        } catch (SQLException ex) {
+           System.out.println("ERROR");
+        }
+        }
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        desbloquear();
+        limpiar();
+        txtCodigo.requestFocus();
+        codigos();
+        isNew = true;
+        //vaciarCampos();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_txtBuscarActionPerformed
    
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
@@ -222,10 +308,14 @@ public class FormMantOrigen extends javax.swing.JFrame {
         Origen o=new Origen(txtCodigo.getText(),txtDescripcion.getText());
        
         boolean rptaRegistro = false;
-        if(isNew)
+        if(isNew){
+            System.out.println("NUEVO");
             rptaRegistro = origenDAO.insertOrigen(o);
-        else
-            rptaRegistro = origenDAO.modificarOrigen(0);
+        }
+        else{
+            System.out.println("MODIFICO");
+            rptaRegistro = origenDAO.modificarOrigen(o);
+        }
         if(rptaRegistro != false){
             JOptionPane.showMessageDialog(null, rptaRegistro);
         }else{
@@ -234,6 +324,81 @@ public class FormMantOrigen extends javax.swing.JFrame {
         llenarTabla(Datos);
         vaciarCampos();
     }//GEN-LAST:event_btnGuardarActionPerformed
+     void cargar(String valor) {
+        try{
+            String [] titulos={"Codigo","Descripcion"};
+            String [] registros= new String[2];
+            model=new DefaultTableModel(null,titulos);
+            
+            String cons="select * from ORIGEN WHERE CONCAT (OrigenId,'',OrigenDescripcion) LIKE '%"+valor+"%'";
+            Statement st= cn.createStatement();
+            ResultSet rs = st.executeQuery(cons);
+            while(rs.next()){
+                registros[0]=rs.getString(1);
+                registros[1]=rs.getString(2);
+                model.addRow(registros);      
+                }
+            Datos.setModel(model);
+            Datos.getColumnModel().getColumn(0).setPreferredWidth(150);
+            Datos.getColumnModel().getColumn(1).setPreferredWidth(300);
+          
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                 }
+     
+    }
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        isNew = false;
+        Origen o=new Origen();
+            int filaEditar = Datos.getSelectedRow();
+            int numFS = Datos.getSelectedRowCount();
+            if(filaEditar>=0 && numFS == 1){
+                String code = String.valueOf(Datos.getValueAt(filaEditar, 0));
+                o.setCodigo(code);
+                int rptaUsuario = JOptionPane.showConfirmDialog(null,"Está seguro de eliminar al usuario con código: "+code+"?");
+                boolean rptaRegistro = false;
+                if(rptaUsuario==0)
+                    System.out.println("AQUI");
+                    rptaRegistro = origenDAO.eliminarOrigen(o);
+                if(rptaRegistro != false){
+                    JOptionPane.showMessageDialog(null, rptaRegistro);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al eliminar");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Selección no válida.");
+            }
+            llenarTabla(Datos);
+    }//GEN-LAST:event_btnEliminarActionPerformed
+    String currentCode=null;
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+          isNew = false;
+            int filaEditar =Datos.getSelectedRow();
+            int numFS = Datos.getSelectedRowCount();
+            if(filaEditar>=0 && numFS == 1){
+                currentCode = String.valueOf(Datos.getValueAt(filaEditar, 0));
+                txtCodigo.setText(String.valueOf(Datos.getValueAt(filaEditar, 0)));
+                txtDescripcion.setText(String.valueOf(Datos.getValueAt(filaEditar, 1)));
+            }else{
+                JOptionPane.showMessageDialog(null,"Selección no válida.");
+            }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        // TODO add your handling code here:
+        Origen o=new Origen();
+        o=origenDAO.buscarOrigen(txtBuscar.getText());
+        cargar(txtBuscar.getText());
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DatosMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel)Datos.getModel();
+        txtCodigo.setText(modelo.getValueAt(Datos.getSelectedRow(),0)+"");
+        txtDescripcion.setText(modelo.getValueAt(Datos.getSelectedRow(),1)+"");
+    }//GEN-LAST:event_DatosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -260,6 +425,7 @@ public class FormMantOrigen extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(FormMantOrigen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -293,19 +459,21 @@ public class FormMantOrigen extends javax.swing.JFrame {
         txtCodigo.setText("");
         txtDescripcion.setText("");
     }
+    Conexion cc= new Conexion();
+    Connection cn = cc.getConexion();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Datos;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables

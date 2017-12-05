@@ -7,22 +7,33 @@ package modelo;
 
 /**
  *
- * @author Liliana
+ * @author Rodrigo
  */
 public class Cliente {
+     private String codigo;
      private String nombre;
-     private String dni;
      private String direccion;
      private String telefono;
      private String correo;
 
-    public Cliente(String nombre, String dni, String direccion, String telefono, String correo) {
-        
+    public Cliente(String codigo, String nombre, String direccion, String telefono, String correo) {
+        this.codigo = codigo;
         this.nombre = nombre;
-        this.dni = dni;
         this.direccion = direccion;
         this.telefono = telefono;
         this.correo = correo;
+    }
+
+    public Cliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -32,15 +43,7 @@ public class Cliente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
+    
     public String getDireccion() {
         return direccion;
     }
