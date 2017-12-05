@@ -49,7 +49,7 @@ public class UsuarioDAO {
         }
         return usuario;
     }
-    public boolean insertUsuario(Usuario usuario){
+    public boolean insertarUsuario(Usuario usuario){
         boolean rptaRegistro = false;
         try{
             Connection acceso = conexion.getConexion();

@@ -44,7 +44,7 @@ public class MarcaDAO {
         return respuesta;
     }
    
-    public boolean modificarUsuario(Marca marca){
+    public boolean modificarMarca(Marca marca){
         boolean rptaRegistro = false;
         try{
             Connection accesoDB = conexion.getConexion();
@@ -62,7 +62,7 @@ public class MarcaDAO {
         return rptaRegistro;
     }
     
-    public boolean eliminarUsuario(Marca marca){
+    public boolean eliminarMarca(Marca marca){
         Boolean rptaRegistro = false;
         try{
             Connection accesoDB = conexion.getConexion();
@@ -78,7 +78,7 @@ public class MarcaDAO {
         return rptaRegistro;
     }
     
-    public ArrayList<Marca> listarUsuario(){
+    public ArrayList<Marca> listarMarca(){
        
         ArrayList listaMarca = new ArrayList();
         Marca marca;

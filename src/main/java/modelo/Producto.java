@@ -14,16 +14,32 @@ public class Producto {
     int categoria;
     int origen;
     String descripcion;
+    String marca;
+    String rutaImagen;
     double precio;
     String estadoRegistro;
 
-    public Producto(String id, int categoria, int origen, String descripcion, double precio, String estadoRegistro) {
+    public Producto(String id, int categoria, int origen, String descripcion, String marca, String rutaImagen, double precio, String estadoRegistro) {
         this.id = id;
         this.categoria = categoria;
         this.origen = origen;
         this.descripcion = descripcion;
+        this.marca = marca;
+        this.rutaImagen = rutaImagen;
         this.precio = precio;
         this.estadoRegistro = estadoRegistro;
+    }
+
+    public Producto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getRutaImagen() {
+        return rutaImagen;
     }
 
     public String getId() {
@@ -50,6 +66,14 @@ public class Producto {
         return estadoRegistro;
     }
 
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
+    
     public void setId(String id) {
         this.id = id;
     }
