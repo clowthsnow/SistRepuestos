@@ -29,8 +29,8 @@ public class ClienteDAO {
         conexion = new Conexion();
     }
     
-    public String agregarCliente(Cliente cliente){
-        String q= null;
+    public boolean agregarCliente(Cliente cliente){
+        Boolean q=false;
         
         try{
             
@@ -45,7 +45,7 @@ public class ClienteDAO {
                     
             int numFAfectadas = cs.executeUpdate();
             if(numFAfectadas > 0)
-                q="Registro exitoso";
+                q=true;
             accesoDB.close();
         }catch(Exception e){
             e.printStackTrace();
@@ -74,8 +74,8 @@ public class ClienteDAO {
         }
         return q;
     }
-    public String eliminarCliente(Cliente cliente){
-        String rptaRegistro = null;
+    public boolean eliminarCliente(Cliente cliente){
+        Boolean q=false;
         try{
             Connection accesoDB = conexion.getConexion();
             CallableStatement cs = accesoDB.prepareCall("UPDATE  cliente SET  ClienteEstReg =  'I' WHERE ClienteId =?");
@@ -83,12 +83,12 @@ public class ClienteDAO {
             
             int numFAfectadas = cs.executeUpdate();
             if(numFAfectadas > 0)
-                rptaRegistro = "Eliminación exitosa.";
+                q = true;
             accesoDB.close();
         }catch(Exception e){
             e.printStackTrace();
         }
-        return rptaRegistro;
+        return q;
     }
     
     public ArrayList<Cliente> listarCliente(){
