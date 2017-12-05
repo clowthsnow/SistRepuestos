@@ -47,17 +47,17 @@ public class StockTiendaTest {
     //
     // @Test
     // public void hello() {}
-    @Test
-    public void insertar() {
-        StockTienda st = new StockTienda("1", "001", "20", "A");
-        StockTiendaDAO control = new StockTiendaDAO();
-        Assert.assertTrue(control.insertarStockTienda(st));
-
-    }
+//    @Test
+//    public void insertar() {
+//        StockTienda st = new StockTienda("0001", "00001", "20", "A");
+//        StockTiendaDAO control = new StockTiendaDAO();
+//        Assert.assertTrue(control.insertarStockTienda(st));
+//
+//    }
 
     @Test
     public void modificarStock() {
-        StockTienda st = new StockTienda("1", "001", "15", "A");
+        StockTienda st = new StockTienda("0001", "00001", "15", "A");
         StockTiendaDAO control = new StockTiendaDAO();
         Assert.assertFalse(control.modificarStockTienda(st));
     }
@@ -70,5 +70,7 @@ public class StockTiendaTest {
        StockTiendaDAO stDao= new StockTiendaDAO();
         Assert.assertNotNull(stDao.listarStockTienda());
     }
+    
+    
 
 }
