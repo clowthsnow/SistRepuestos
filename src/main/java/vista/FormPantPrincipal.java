@@ -332,10 +332,9 @@ System.out.println("LA VIEJA CONFIABLE");
 
 private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
 System.out.println("LA VIEJA CONFIABLE");
-    FormBusClientes ventas = new FormBusClientes();
-    //jdpescritorio.add(ventas);
-    //ventas.show();
-    ventas.setVisible(true);// TODO add your handling code here:
+    FormBusqueda ventas = new FormBusqueda();
+    jdpescritorio.add(ventas);
+    ventas.show();
    
 }//GEN-LAST:event_jMenuItem8ActionPerformed
 
