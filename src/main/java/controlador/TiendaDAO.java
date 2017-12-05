@@ -20,10 +20,10 @@ import modelo.Tienda;
 public class TiendaDAO {
     Conexion conexion;
     final String BUSCAR = "select * from TIENDA where TiendaId=?";
-    final String INSERTAR = "INSERT INTO `repuestos`.`tienda`(`TiendaId`, `TiendaDescripcion`, `TiendaEstReg`) VALUES (?,?,?])";
+    final String INSERTAR = "INSERT INTO `repuestos`.`tienda`(`TiendaId`, `TiendaDescripcion`, `TiendaEstReg`) VALUES (?,?,?)";
     final String UPDATE = "UPDATE  `repuestos`.`TIENDA` SET `TiendaDescripcion` =  ? WHERE  `TIENDA`.`TiendaId` =?;";
     final String ELIMINAR = "UPDATE  `repuestos`.`TIENDA` SET  `TiendaEstReg` =  'I' WHERE  `TIENDA`.`TiendaId` =?";
-    final String LISTAR = "Select * from `repuestos`.`TIENDA`";
+    final String LISTAR = "SELECT * FROM `tienda`";
     
     public TiendaDAO(){
         conexion = new Conexion();
@@ -32,7 +32,7 @@ public class TiendaDAO {
         Tienda tienda = null;
         Connection acceso = conexion.getConexion();
         try{
-            PreparedStatement ps = acceso.prepareStatement(INSERTAR);
+            PreparedStatement ps = acceso.prepareStatement(BUSCAR);
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -72,7 +72,9 @@ public class TiendaDAO {
         try{
             Connection accesoDB = conexion.getConexion();
             CallableStatement cs = accesoDB.prepareCall(INSERTAR);
-            cs.setString(1, tienda.getTiendaDescripcion());
+            cs.setString(1, tienda.getTiendaId());
+            cs.setString(2, tienda.getTiendaDescripcion());
+            cs.setString(3, tienda.getTiendaEstReg());
             
             int numFAfectadas = cs.executeUpdate();
             if(numFAfectadas > 0)
@@ -120,7 +122,7 @@ public class TiendaDAO {
         try{
             Connection accesoDB = conexion.getConexion();
             //String eliminarSQL="DELETE FROM ORIGEN WHERE OrigenId = '"+origen.getCodigo()+"'";
-            CallableStatement cs = accesoDB.prepareCall("DELETE FROM TIENDA WHERE TiendaId = '"+tienda.getTiendaId() + "'");
+            CallableStatement cs = accesoDB.prepareCall("DELETE FROM `tienda` WHERE TiendaId = `"+tienda.getTiendaId() + "`");
             //cs.setString(1, origen.getCodigo());
             int numFAfectadas = cs.executeUpdate();
             if(numFAfectadas > 0)
