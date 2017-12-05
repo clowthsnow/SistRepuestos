@@ -45,15 +45,27 @@ public class TiendaTest {
     //
     // @Test
     // public void hello() {}
-    public void insertarOrigen(){
-       Tienda tienda = new Tienda ("1234","LIma", "A");
+    @Test
+    public void prospecto() {
+        String id="0001";
+	String descripcion="Jose";
+        String estado = "A";        
+        Tienda tienda = new Tienda(id,descripcion, estado);
+		
+	assertTrue(tienda.getTiendaId().equals(id));
+	assertTrue(tienda.getTiendaDescripcion().equals(descripcion));
+	assertTrue(tienda.getTiendaEstReg().equals(estado));
+	}
+    @Test
+    public void insertarTienda(){
+        Tienda tienda = new Tienda ("12345","LIma", "A");
 	TiendaDAO tiendaDAO = new TiendaDAO();
         
         Assert.assertTrue(tiendaDAO.insertarTienda(tienda));
     }
     @Test
     public void modificarTienda(){
-        Tienda tienda = new Tienda ("1234","LIma", "A");
+        Tienda tienda = new Tienda ("12346","Luma", "A");
 	TiendaDAO tiendaDAO = new TiendaDAO();
         
         
@@ -64,22 +76,23 @@ public class TiendaTest {
            System.out.println("No existe el usuario");
         }
     }
+//    @Test
+//    public void eliminarTienda(){
+//        Tienda tienda = new Tienda ("003","LIma", "A");
+//	TiendaDAO tiendaDAO = new TiendaDAO();
+//        tiendaDAO.insertarTienda(tienda);
+//        Assert.assertTrue(tiendaDAO.eliminarTienda2(tienda));
+//    }
     @Test
-    public void eliminarTienda(){
-        Tienda tienda = new Tienda ("1234","LIma", "A");
-	TiendaDAO tiendaDAO = new TiendaDAO();
-        tiendaDAO.insertarTienda(tienda);
-        Assert.assertTrue(tiendaDAO.eliminarTienda2(tienda));
-    }
-    @Test
-    public void listarOrigenes(){
+    public void listarTiendas(){
+        
         TiendaDAO tiendaDAO = new TiendaDAO();
-        try{
+        //try{
             ArrayList<Tienda> tiendas = tiendaDAO.listarTienda();
             assertTrue(tiendas.size()>0);
-        }catch(Exception e){
-            Assert.fail("Falló el listado: " + e.getMessage());
-        }
+        //}catch(Exception e){
+        //    Assert.fail("Falló el listado: " + e.getMessage());
+        //}
     }
     public void estavacio(){
         ArrayList<Tienda> tiendas=new ArrayList<Tienda>();
