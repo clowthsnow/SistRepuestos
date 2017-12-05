@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import modelo.Conexion;
+import modelo.Producto;
 import modelo.StockTienda;
 
 /**
@@ -87,6 +88,31 @@ public class StockTiendaDAO {
             Connection accesoDB = conexion.getConexion();
             PreparedStatement ps = accesoDB.prepareStatement("Select * from stocktienda");
             ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+
+                stocktienda= new StockTienda();
+                stocktienda.setTienda(rs.getString(1));
+                stocktienda.setProducto(rs.getString(2));
+                stocktienda.setProducto(rs.getString(3));
+                stocktienda.setEstadoRegistro(rs.getString(4));
+                
+                listaStockTienda.add(stocktienda);
+            }
+            accesoDB.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaStockTienda;
+    }
+    public ArrayList<StockTienda> listarProductosTienda(Producto p){
+        ArrayList listaStockTienda = new ArrayList();
+        StockTienda stocktienda;
+        try {
+            Connection accesoDB = conexion.getConexion();
+            CallableStatement cs = accesoDB.prepareCall("SELECT tienda.*, producto.*, stocktienda.* FROM `stocktienda` LEFT JOIN tienda ON stocktienda.StockTienda=tienda.TiendaId LEFT JOIN producto ON stocktienda.StockTiendaProducto=producto.ProductoId WHERE stocktienda.StockTiendaProducto=  ?");
+            cs.setString(1, p.getId());
+//            PreparedStatement ps = accesoDB.prepareStatement("SELECT tienda.*, producto.*, stocktienda.* FROM `stocktienda` LEFT JOIN tienda ON stocktienda.StockTienda=tienda.TiendaId LEFT JOIN producto ON stocktienda.StockTiendaProducto=producto.ProductoId WHERE stocktienda.StockTiendaProducto='001'");
+          ResultSet rs = cs.executeQuery();
             while(rs.next()){
 
                 stocktienda= new StockTienda();
