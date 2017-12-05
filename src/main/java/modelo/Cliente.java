@@ -16,7 +16,9 @@ public class Cliente {
      private String telefono;
      private String correo;
 
-    public Cliente(String nombre, String dni, String direccion, String telefono, String correo) {
+    public Cliente(){
+    }
+     public Cliente(String nombre, String dni, String direccion, String telefono, String correo) {
         
         this.nombre = nombre;
         this.dni = dni;
